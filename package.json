@@ -83,6 +83,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@comunica/reasoning-context-entries": "^0.2.0",
     "deep-taxonomy-benchmark": "^1.2.0",
     "eyereasoner": "^16.15.16",
     "hylar-core": "^1.2.0",

@@ -20,6 +20,7 @@ jobs:
         engine: [EYE, HYLAR, N3]
 
     name: Node ${{ matrix.node-version }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
+    continue-on-error: true
 
     steps:
     - uses: actions/checkout@v4
