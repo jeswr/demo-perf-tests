@@ -16,8 +16,6 @@
     "test": "jest",
     "lint": "eslint lib/* __tests__/* --ext .ts",
     "lint:fix": "eslint lib/* __tests__/* --ext .ts --fix",
-    "build": "tsc",
-    "prepare": "tsc",
     "semantic-release": "semantic-release"
   },
   "repository": {
@@ -83,5 +81,14 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "deep-taxonomy-benchmark": "^1.2.0",
+    "eyereasoner": "^16.15.16",
+    "hylar-core": "^1.2.0",
+    "n3": "github:rdfjs/N3.js#a13e50e20c18eb0bc869db2a7c09fe552c653a4e"
+  },
+  "overrides": {
+    "n3": "$n3"
   }
 }
