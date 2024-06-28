@@ -19,6 +19,8 @@ jobs:
         extended: [true, false]
         engine: [EYE, HYLAR, N3]
 
+    name: Node ${{ matrix.node-version }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
