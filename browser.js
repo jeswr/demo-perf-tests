@@ -14,7 +14,7 @@ const driver = new webdriver.Builder()
     .build();
 
 (async function(){
-    const filePath = `file://${path.join(__dirname, `webpage-${process.argv[process.argv.length - 1]}.html`)}`;
+    const filePath = `file://${path.join(__dirname, `webpage-${process.argv[process.argv.length - 2]}-${process.argv[process.argv.length - 1]}.html`)}`;
     console.log(filePath)
     await driver.get(filePath);
     await driver.sleep(2000);
