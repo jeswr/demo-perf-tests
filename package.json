@@ -17,7 +17,7 @@
     "lint": "eslint lib/* __tests__/* --ext .ts",
     "lint:fix": "eslint lib/* __tests__/* --ext .ts --fix",
     "semantic-release": "semantic-release",
-    "build": "webpack --config webpack.config.js"
+    "build": "node make-pages.mjs && webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
