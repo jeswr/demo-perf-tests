@@ -85,7 +85,7 @@
   "dependencies": {
     "@comunica/reasoning-context-entries": "^0.2.0",
     "deep-taxonomy-benchmark": "^1.2.0",
-    "eyereasoner": "^16.20.0",
+    "eyereasoner": "^16.21.1",
     "hylar-core": "^1.2.2",
     "n3": "github:rdfjs/N3.js#a13e50e20c18eb0bc869db2a7c09fe552c653a4e"
   },
