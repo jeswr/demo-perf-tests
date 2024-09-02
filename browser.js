@@ -1,21 +1,38 @@
 const webdriver = require('selenium-webdriver');
-const firefox = require('selenium-webdriver/chrome');
+const chrome = require('selenium-webdriver/chrome');
+const firefox = require('selenium-webdriver/firefox');
 const path = require('path');
-const options = new firefox.Options();
-options.addArguments('headless');
-options.addArguments('disable-gpu'); // Optional, but recommended for headless mode
+
+// Get browser type from command line arguments
+const browserType = process.argv[2] || 'chrome';
+
+let options;
+if (browserType === 'chrome') {
+    options = new chrome.Options();
+    options.addArguments('headless');
+    options.addArguments('disable-gpu'); // Optional, but recommended for headless mode
+} else if (browserType === 'firefox') {
+    options = new firefox.Options();
+    options.addArguments('-headless');
+} else {
+    console.error('Unsupported browser type. Use "chrome" or "firefox".');
+    process.exit(1);
+}
+
+// Enable logging
 const prefs = new webdriver.logging.Preferences();
 prefs.setLevel(webdriver.logging.Type.BROWSER, webdriver.logging.Level.ALL);
-options.setLoggingPrefs(prefs)
+options.setLoggingPrefs(prefs);
 
 const driver = new webdriver.Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(options)
+    .forBrowser(browserType)
+    .setChromeOptions(browserType === 'chrome' ? options : undefined)
+    .setFirefoxOptions(browserType === 'firefox' ? options : undefined)
     .build();
 
 (async function(){
-    const filePath = `file://${path.join(__dirname, `webpage-${process.argv[process.argv.length - 2]}-${process.argv[process.argv.length - 1]}.html`)}`;
-    console.log(filePath)
+    const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
+    console.log(filePath);
     await driver.get(filePath);
     await driver.sleep(2000);
 

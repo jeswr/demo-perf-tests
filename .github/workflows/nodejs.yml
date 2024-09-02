@@ -38,6 +38,7 @@ jobs:
         node-version: [22]
         extended: [true, false]
         engine: [EYE, HYLAR, N3]
+        browser: [chrome, firefox]
 
     name: Browser ${{ matrix.node-version }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
     continue-on-error: true
@@ -49,4 +50,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build
-    - run: node browser.js ${{ matrix.engine }} ${{ matrix.extended }}
+    - run: node browser.js ${{ matrix.browser }} ${{ matrix.engine }} ${{ matrix.extended }}
