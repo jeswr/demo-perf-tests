@@ -43,10 +43,10 @@ const driver = new webdriver.Builder()
             logs.forEach(log => console.log(`[${log.level.name}] ${log.message}`));
         }
 
-        await driver.get(filePath);
-
         // Continuously fetch logs every second
         const logInterval = setInterval(fetchLogs, 100);
+
+        await driver.get(filePath);
 
         // Wait for the page to load completely
         await driver.sleep(10000); // Adjust the sleep time as needed
