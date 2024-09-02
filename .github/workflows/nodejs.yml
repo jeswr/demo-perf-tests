@@ -37,9 +37,9 @@ jobs:
       matrix:
         node-version: [22]
         # extended: [true, false]
-        # engine: [EYE, HYLAR, N3]
+        engine: [eye, hylar, n3]
 
-    # name: Browser ${{ matrix.node-version }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
+    name: Browser ${{ matrix.node-version }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
     continue-on-error: true
 
     steps:
@@ -49,4 +49,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build
-    - run: node browser.js
+    - run: node browser.js ${{ matrix.engine }}
