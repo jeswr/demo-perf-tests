@@ -32,7 +32,8 @@ const driver = new webdriver.Builder()
 
 (async function(){
     try {
-        const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
+        // const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
+        const filePath = `http://localhost:4965/webpage-${process.argv[3]}-${process.argv[4]}.html`;
         console.log(filePath);
 
         // Function to fetch and print logs in real-time
