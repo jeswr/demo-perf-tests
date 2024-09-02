@@ -14,6 +14,7 @@ if (browserType === 'chrome') {
 } else if (browserType === 'firefox') {
     options = new firefox.Options();
     options.addArguments('-headless');
+    options.addArguments('-headless');
 } else {
     console.error('Unsupported browser type. Use "chrome" or "firefox".');
     process.exit(1);
@@ -33,7 +34,7 @@ const driver = new webdriver.Builder()
 (async function(){
     try {
         // const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
-        const filePath = `http://localhost:4965/webpage-${process.argv[3]}-${process.argv[4]}.html`;
+        const filePath = `http://localhost:4975/webpage-${process.argv[3]}-${process.argv[4]}.html`;
         console.log(filePath);
 
         // Function to fetch and print logs in real-time
