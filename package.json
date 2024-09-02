@@ -18,7 +18,9 @@
     "lint:fix": "eslint lib/* __tests__/* --ext .ts --fix",
     "semantic-release": "semantic-release",
     "build": "node make-pages.mjs && webpack --config webpack.config.js",
-    "serve": "http-server . -p 4965"
+    "serve": "http-server . -p 4965",
+    "browser": "node browser.js",
+    "browser:perf": "concurrently --kill-others \"npm run serve\" \"npm run browser ${0} ${1} ${2}\""
   },
   "repository": {
     "type": "git",

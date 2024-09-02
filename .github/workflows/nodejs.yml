@@ -50,5 +50,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build
-    - run: nohup npm run serve > /dev/null 2>&1
-    - run: node browser.js ${{ matrix.browser }} ${{ matrix.engine }} ${{ matrix.extended }}
+    - run: npx concurrently --kill-others "npm run serve" "node browser.js ${{ matrix.browser }} ${{ matrix.engine }} ${{ matrix.extended }}"
