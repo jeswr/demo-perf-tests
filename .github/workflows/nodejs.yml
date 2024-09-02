@@ -10,7 +10,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  node-perf:
     runs-on: ubuntu-latest
 
     strategy:
@@ -28,17 +28,25 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm run build --if-present
     - run: ${{ matrix.engine }}=true EXTENDED=${{ matrix.extended }} node lib/index.mjs
 
-  eslint:
-    name: Lint
+  browser-perf:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22]
+        # extended: [true, false]
+        # engine: [EYE, HYLAR, N3]
+
+    # name: Browser ${{ matrix.node-version }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
+    continue-on-error: true
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm install
-      - run: npm run build --if-present
-      - run: npm run-script lint
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm run build
+    - run: node browser.js
