@@ -31,11 +31,30 @@ const driver = new webdriver.Builder()
     .build();
 
 (async function(){
-    const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
-    console.log(filePath);
-    await driver.get(filePath);
-    await driver.sleep(2000);
+    try {
+        const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
+        console.log(filePath);
 
-    const logs = await driver.manage().logs().get(webdriver.logging.Type.BROWSER);
-    logs.forEach(log => console.log(log.message));
+        // Function to fetch and print logs in real-time
+        async function fetchLogs() {
+            const logs = await driver.manage().logs().get(webdriver.logging.Type.BROWSER);
+            logs.forEach(log => console.log(`[${log.level.name}] ${log.message}`));
+        }
+
+        await driver.get(filePath);
+
+        // Continuously fetch logs every second
+        const logInterval = setInterval(fetchLogs, 100);
+
+        // Wait for the page to load completely
+        await driver.sleep(10000); // Adjust the sleep time as needed
+
+        // Clear the interval after the page has loaded
+        clearInterval(logInterval);
+
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        await driver.quit();
+    }
 })();

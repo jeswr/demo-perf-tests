@@ -40,7 +40,7 @@ jobs:
         engine: [EYE, HYLAR, N3]
         browser: [chrome, firefox]
 
-    name: Browser ${{ matrix.node-version }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
+    name: Browser ${{ matrix.browser }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
     continue-on-error: true
 
     steps:
