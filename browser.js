@@ -35,7 +35,22 @@ const driver = new webdriver.Builder()
     .build();
 
 (async function(){
+    // Function to fetch and print logs in real-time
+    let logInterval
+
+    if (browserType === 'chrome') {
+        async function fetchLogs() {
+            const logs = await driver.manage().logs().get(webdriver.logging.Type.BROWSER);
+            logs.forEach(log => console.log(`[${log.level.name}] ${log.message}`));
+        }
+    
+        // Continuously fetch logs every second
+        const logInterval = setInterval(fetchLogs, 100);
+
+    }
+
     try {
+        // const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
         const filePath = `http://localhost:4975/webpage-${process.argv[3]}-${process.argv[4]}.html`;
         console.log(filePath);
         await driver.manage().setTimeouts({ script: 60 * 60 * 1000 });
@@ -56,6 +71,10 @@ const driver = new webdriver.Builder()
         // Clear the interval after the page has loaded
         // clearInterval(logInterval);
         // await fetchLogs();
+        if (browserType === 'chrome') {
+            clearInterval(logInterval);
+            await fetchLogs();
+        }
 
         await driver.quit();
     }
