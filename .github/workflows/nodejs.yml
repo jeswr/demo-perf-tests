@@ -38,7 +38,7 @@ jobs:
         node-version: [22]
         extended: [true, false]
         engine: [EYE, HYLAR, N3]
-        browser: [chrome]
+        browser: [chrome, firefox]
 
 
     name: Browser ${{ matrix.browser }} - Engine ${{ matrix.engine }} - Extended ${{ matrix.extended }}
@@ -51,4 +51,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build
-    - run: npx concurrently --kill-others "npm run serve" "node browser.js ${{ matrix.browser }} ${{ matrix.engine }} ${{ matrix.extended }}"
+    - run: npx concurrently --kill-others "npm run serve" "node browser.js ${{ matrix.browser }} ${{ matrix.engine }} ${{ matrix.extended }}" --hide 0
