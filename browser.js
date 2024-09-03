@@ -35,20 +35,10 @@ const driver = new webdriver.Builder()
     .build();
 
 (async function(){
-    // Function to fetch and print logs in real-time
-    let logInterval
-
-    if (browserType === 'chrome') {
-        async function fetchLogs() {
-            const logs = await driver.manage().logs().get(webdriver.logging.Type.BROWSER);
-            logs.forEach(log => console.log(`[${log.level.name}] ${log.message}`));
-        }
-    
-        // Continuously fetch logs every second
-        const logInterval = setInterval(fetchLogs, 100);
-
+    async function fetchLogs() {
+        const logs = await driver.manage().logs().get(webdriver.logging.Type.BROWSER);
+        logs.forEach(log => console.log(`[${log.level.name}] ${log.message}`));
     }
-
     try {
         // const filePath = `file://${path.join(__dirname, `webpage-${process.argv[3]}-${process.argv[4]}.html`)}`;
         const filePath = `http://localhost:4975/webpage-${process.argv[3]}-${process.argv[4]}.html`;
@@ -58,21 +48,35 @@ const driver = new webdriver.Builder()
 
         console.log('Reasoning over TimBL profile and FOAF');
         console.log(await driver.executeScript(() => perf.run()));
+        if (browserType === 'chrome') {
+            await fetchLogs();
+        }
         console.log('DTB');
         console.log('Depth 10**1', await driver.executeScript(() => perf.deepTaxonomy(process.env.EXTENDED === true || process.env.EXTENDED === 'true', 1)));
+        if (browserType === 'chrome') {
+            await fetchLogs();
+        }
         console.log('Depth 10**2', await driver.executeScript(() => perf.deepTaxonomy(process.env.EXTENDED === true || process.env.EXTENDED === 'true', 2)));
+        if (browserType === 'chrome') {
+            await fetchLogs();
+        }
         console.log('Depth 10**3', await driver.executeScript(() => perf.deepTaxonomy(process.env.EXTENDED === true || process.env.EXTENDED === 'true', 3)));
+        if (browserType === 'chrome') {
+            await fetchLogs();
+        }
         console.log('Depth 10**4', await driver.executeScript(() => perf.deepTaxonomy(process.env.EXTENDED === true || process.env.EXTENDED === 'true', 4)));
+        if (browserType === 'chrome') {
+            await fetchLogs();
+        }
         console.log('Depth 10**5', await driver.executeScript(() => perf.deepTaxonomy(process.env.EXTENDED === true || process.env.EXTENDED === 'true', 5)));
+        if (browserType === 'chrome') {
+            await fetchLogs();
+        }
         console.log('Depth 10**6', await driver.executeScript(() => perf.deepTaxonomy(process.env.EXTENDED === true || process.env.EXTENDED === 'true', 6)));
     } catch (error) {
         console.error('Error:', error);
     } finally {
-        // Clear the interval after the page has loaded
-        // clearInterval(logInterval);
-        // await fetchLogs();
         if (browserType === 'chrome') {
-            clearInterval(logInterval);
             await fetchLogs();
         }
 
