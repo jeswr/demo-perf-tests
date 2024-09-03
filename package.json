@@ -87,7 +87,7 @@
   "dependencies": {
     "@comunica/reasoning-context-entries": "^0.2.0",
     "deep-taxonomy-benchmark": "^2.0.0",
-    "eyereasoner": "^16.21.1",
+    "eyereasoner": "^16.22.0",
     "hylar-core": "^1.2.2",
     "n3": "^1.21.0",
     "selenium-webdriver": "^4.24.0"
